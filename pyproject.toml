@@ -11,6 +11,12 @@ networkx = "^3.3"
 streamlit = "^1.38.0"
 plotly = "^5.24.0"
 mofstructure = "^0.1.7"
+py3dmol = "^2.4.0"
+stmol = "^0.0.9"
+ipython = "^8.27.0"
+ipython-genutils = "^0.2.0"
+elasticsearch = "^8.15.1"
+whoosh = "^2.7.4"
 
 
 [tool.poetry.group.dev.dependencies]

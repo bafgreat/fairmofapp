@@ -10,9 +10,12 @@ __status__ = "production"
 # Dr Dinga Wonanke as part of hos MSCA post doctoral fellowship at TU Dresden.#
 #                                                                             #
 ###############################################################################
-
+import os
+import shutil
+import gzip
 import networkx as nx
 import plotly.graph_objects as go
+import pandas as pd
 
 
 def create_graph_from_adjacency_matrix(adj_matrix: dict):
@@ -57,7 +60,7 @@ def visualize_interactive_graph(nx_graph: nx.Graph, title):
         mode='markers',
         textposition='bottom center',
         hoverinfo='text',
-        marker=dict(size=10, color='blue')
+        marker=dict(size=20, color='blue')
     )
 
     edge_trace = []
@@ -80,8 +83,44 @@ def visualize_interactive_graph(nx_graph: nx.Graph, title):
         showlegend=False,
         hovermode='closest',
         margin=dict(b=0, l=0, r=0, t=40),
-        xaxis=dict(showgrid=False, zeroline=False),
-        yaxis=dict(showgrid=False, zeroline=False)
+        xaxis=dict(showgrid=False, zeroline=False, visible=False),
+        yaxis=dict(showgrid=False, zeroline=False, visible=False)
     )
+    return fig
 
-    fig.show()
+
+def get_similar_mofs(mof_name, adj_matrix, top_n=5):
+    '''
+    A function that returns the top n similar MOFs to a given MOF.
+    **parameters:**
+        mof_name (str): The name of the MOF for which similarities are to be found.
+        adj_matrix (dict): A dictionary where keys are MOF names,
+        and values are dictionaries of neighboring MOFs and their similarity scores.
+        top_n (int): The number of similar MOFs to return (default is 5).
+    '''
+    if mof_name not in adj_matrix:
+        return pd.DataFrame(columns=["MOF", "Similarity"])
+
+    mof_similarities = adj_matrix[mof_name]
+    sorted_mofs = sorted(mof_similarities.items(), key=lambda x: x[1], reverse=True)
+    sorted_mofs = [(name, score) for name, score in sorted_mofs if name != mof_name]
+    return pd.DataFrame(sorted_mofs[:top_n], columns=["MOF", "Similarity"])
+
+
+def search_and_extract_from_gzip(mof_names, gzip_path, output_dir="mof_folders"):
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    with gzip.open(gzip_path, 'rb') as gz_file:
+        file_content = gz_file.read()
+
+        for mof_name in mof_names:
+            mof_filename = f"{mof_name}_fair_op.cif"
+
+            if mof_filename in file_content.decode('utf-8'):
+                mof_output_path = os.path.join(output_dir, mof_filename)
+
+                with open(mof_output_path, 'wb') as extracted_file:
+                    extracted_file.write(file_content)
+
+    return output_dir
