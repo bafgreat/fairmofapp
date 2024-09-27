@@ -114,9 +114,48 @@ if uploaded_file is not None:
 
     if st.checkbox("Compute porosity"):
         porosity = compute_porosity(ase_atom)
-        porosity_df = pd.DataFrame(
-            porosity.items(), columns=["Metric", "Value"])
-        st.write("Porosity Results:", porosity_df)
+
+        # Renaming the keys in the porosity dictionary
+        porosity_renamed = {
+            "AV_Volume_fraction": "Void Fraction",
+            "AV_A^3": "Accessible Volume (Å³)",
+            "ASA_A^2": "Accessible Surface Area (Å²)",
+            "ASA_m^2/cm^3": "Accessible Surface Areas (m²/cm³)",
+            "Number_of_channels": "Number of Channels",
+            "LCD_A": "Largest Cavity Diameter (Å)",
+            "lfpd_A": "Largest Free Sphere (Å)",
+            "PLD_A": "Pore Limiting Diameter (Å)"
+        }
+
+        # Applying the renaming to the porosity dictionary
+        porosity = {porosity_renamed.get(k, k): v for k, v in porosity.items()}
+
+        porosity_df = pd.DataFrame(porosity.items(), columns=["Metric", "Value"])
+
+        # Styling the DataFrame for a black background
+        styled_table = porosity_df.style.set_table_styles(
+            [
+                {'selector': 'thead th', 'props': [('background-color', '#333333'), ('color', 'white'), ('text-align', 'center')]},
+                {'selector': 'tbody td', 'props': [('text-align', 'center'), ('border', '1px solid white'), ('color', 'white')]},
+                {'selector': 'tbody tr:nth-child(even)', 'props': [('background-color', '#444444')]},
+                {'selector': 'tbody tr:nth-child(odd)', 'props': [('background-color', '#222222')]}
+            ]
+        ).set_properties(**{'font-size': '14px', 'font-family': 'Arial', 'border-collapse': 'collapse'})
+
+        # Centering the table using custom CSS
+        st.markdown("""
+            <style>
+            .center-table {
+                display: flex;
+                justify-content: center;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+
+        st.write('<div class="center-table">', unsafe_allow_html=True)
+        st.write("Porosity Results:")
+        st.write(styled_table.to_html(), unsafe_allow_html=True)
+        st.write('</div>', unsafe_allow_html=True)
 
         porosity_csv = porosity_df.to_csv(index=False)
         st.download_button(
@@ -125,6 +164,7 @@ if uploaded_file is not None:
             file_name="porosity_results.csv",
             mime="text/csv"
         )
+
 
     if st.checkbox("Deconstruct into SBUs"):
         metal_sbus, organic_sbus = sbu_data(ase_atom)

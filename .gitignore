@@ -168,3 +168,14 @@ fairmofsyncondition/.DS_Store
 .DS_Store
 scripts
 .python-version
+data/json_files/
+data/compile_json.py
+data/store
+data/cifs/GFN_CIFs
+data/cifs/Experiment_cif/
+data/csv
+data/compiled_json
+data/icons
+data/.DS_Store
+layout.py
+__pycache__
