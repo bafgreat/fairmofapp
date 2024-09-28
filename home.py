@@ -13,6 +13,7 @@ def get_base64_image(image_path):
 
 # Centered Title and Description
 st.markdown('<h1 style="text-align: center;">Welcome to FAIRMOF App Dashboard</h1>', unsafe_allow_html=True)
+st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<h3 style="text-align: center;">An efficient tool to accelerate the discovery of MOFs</h3>', unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -65,6 +66,7 @@ for page_name, page_info in Pages.items():
     with col2:
         st.markdown(f"### {page_name}")
         st.markdown(page_info["description"])
+    st.markdown("<hr>", unsafe_allow_html=True)
 
 # Apply CSS to style the button (image) as a clickable image
 st.markdown(
@@ -79,3 +81,4 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+

@@ -41,9 +41,12 @@ def search_mofs(query_str, index_dir):
             mof_names = []
             for result in results:
                 mof_names.append(result['refcode'])
+                doi = result.get("doi", "")
+
+                # doi_link = st.link_button(f'https://doi.org/{doi}', doi) if doi else "Not in database"
                 result_list.append({
                     "Refcode": result["refcode"],
-                    "PLD (Å)": result.get("PLD", ""),
+                    "PLD (Å)": result.get("PLD", "N/A"),
                     "LCD (Å)": result.get("LCD", "N/A"),
                     "ASA (Å^2)": result.get("ASA", "N/A"),
                     "AV (Å^3)": result.get("AV", "N/A"),
@@ -54,7 +57,7 @@ def search_mofs(query_str, index_dir):
                     "SBU Type": result.get("sbu_type", ""),
                     "Topology": result.get("topology", ""),
                     "Chemical Name of Ligand": result.get("chemical_name", ""),
-                    "DOI": result.get("doi", ""),
+                    "DOI": doi
                 })
             return result_list, mof_names
     return [], []
@@ -107,11 +110,12 @@ def remove_unwanted_columns(df, query):
 
 # Streamlit Interface
 st.title("MOF Search Engine")
+st.markdown("<hr>", unsafe_allow_html=True)
 index_dir = './data/index_dir'
 
 # Free text query
 query = st.text_input(
-    "Enter search query (e.g., metal:Zn OR Chemical Name of Ligand:benzene)")
+    "Enter search query (e.g. ABAFUH, Zn, carboxylate, yellow, pcu, paddlewheel, PLD=10, n_channel=2)")
 if query:
     search_results, mof_names = search_mofs(query, index_dir)
     if search_results:

@@ -122,7 +122,7 @@ def create_index(json_dir, index_dir):
                             ligand_inchi = safe_join(properties.get("ligand inchikey", []))
                             ligand_smile = safe_join(properties.get("ligand smiles", []))
                             chemical_name = safe_join(properties.get("chemical name", []))
-                            sbu_type = safe_join(properties.get("sbu type", []))
+                            sbu_type = safe_join(list(set(properties.get("sbu type", []))))
                             color = safe_join(properties.get("color", []))
                             topology = safe_join(properties.get("topology", []))
                             iupac_name = safe_join(properties.get("iupac name", []))
