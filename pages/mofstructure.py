@@ -58,8 +58,6 @@ def display_metal_sbu(metals):
     for keys in list_to_display:
         if keys in metals.info:
             st.write(f"{data_key[keys]}: {metals.info[keys]}")
-    # if 'point_of_extension' in metals.info:
-    #      st.write(f"{'SBU coordination number'}: {len(metals.info['point_of_extension'])}")
 
     return
 
@@ -102,7 +100,6 @@ if uploaded_file is not None:
         viewer = visualize_structure(ase_atom)
         showmol(viewer, height=500, width=800)
 
-        # Option to download the guest-removed structure in CIF format (in-memory)
         cif_buffer = BytesIO()
         write(cif_buffer, ase_atom, format="cif")
         st.download_button(
@@ -115,7 +112,6 @@ if uploaded_file is not None:
     if st.checkbox("Compute porosity"):
         porosity = compute_porosity(ase_atom)
 
-        # Renaming the keys in the porosity dictionary
         porosity_renamed = {
             "AV_Volume_fraction": "Void Fraction",
             "AV_A^3": "Accessible Volume (Å³)",
@@ -127,12 +123,10 @@ if uploaded_file is not None:
             "PLD_A": "Pore Limiting Diameter (Å)"
         }
 
-        # Applying the renaming to the porosity dictionary
         porosity = {porosity_renamed.get(k, k): v for k, v in porosity.items()}
 
         porosity_df = pd.DataFrame(porosity.items(), columns=["Metric", "Value"])
 
-        # Styling the DataFrame for a black background
         styled_table = porosity_df.style.set_table_styles(
             [
                 {'selector': 'thead th', 'props': [('background-color', '#333333'), ('color', 'white'), ('text-align', 'center')]},
@@ -142,7 +136,6 @@ if uploaded_file is not None:
             ]
         ).set_properties(**{'font-size': '14px', 'font-family': 'Arial', 'border-collapse': 'collapse'})
 
-        # Centering the table using custom CSS
         st.markdown("""
             <style>
             .center-table {

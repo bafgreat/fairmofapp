@@ -19,7 +19,7 @@ elasticsearch = "^8.15.1"
 # whoosh = "^2.7.4"
 streamlit-aggrid = "^1.0.5"
 watchdog = "2.1.5"
-whoosh-update = "^0.1.0"
+whoosh-update = "^0.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
