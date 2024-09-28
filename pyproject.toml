@@ -16,9 +16,10 @@ stmol = "^0.0.9"
 ipython = "^8.27.0"
 ipython-genutils = "^0.2.0"
 elasticsearch = "^8.15.1"
-whoosh = "^2.7.4"
+# whoosh = "^2.7.4"
 streamlit-aggrid = "^1.0.5"
 watchdog = "2.1.5"
+whoosh-update = "^0.1.0"
 
 
 [tool.poetry.group.dev.dependencies]

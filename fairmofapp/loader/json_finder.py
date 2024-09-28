@@ -1,7 +1,7 @@
 import os
 import json
-from whoosh import index
-from whoosh.fields import Schema, TEXT, NUMERIC
+from whoosh_update import index
+from whoosh_update.fields import Schema, TEXT, NUMERIC
 import streamlit as st
 
 

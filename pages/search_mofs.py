@@ -2,9 +2,9 @@ import os
 import zipfile
 import shutil
 import json
-from whoosh import index
-from whoosh.fields import Schema, TEXT, NUMERIC
-from whoosh.qparser import MultifieldParser
+from whoosh_update import index
+from whoosh_update.fields import Schema, TEXT, NUMERIC
+from whoosh_update.qparser import MultifieldParser
 import streamlit as st
 import pandas as pd
 from tempfile import TemporaryDirectory
