@@ -114,23 +114,23 @@ st.markdown(
                 <th>Example</th>
             </tr>
             <tr>
-                <th>PLD</th>
+                <th>Pore Limiting Diameter</th>
                 <th>PLD=10</th>
             </tr>
             <tr>
-                <th>LCD</th>
+                <th>Largest Cavity Diameter</th>
                 <th>LCD=20</th>
             </tr>
             <tr>
-                <th>ASA</th>
+                <th>Accessible Surface Area</th>
                 <th>ASA=959</th>
             </tr>
             <tr>
-                <th>AV</th>
+                <th>Accessible Volume</th>
                 <th>AV=5945</th>
             </tr>
             <tr>
-                <th>n_channel</th>
+                <th>Number of Channels</th>
                 <th>n_channel=2</th>
             </tr>
         </thead>

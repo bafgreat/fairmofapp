@@ -48,6 +48,7 @@ Pages = {
 }
 
 # Display images as clickable elements
+
 for page_name, page_info in Pages.items():
     col1, col2 = st.columns([1, 3])
 
