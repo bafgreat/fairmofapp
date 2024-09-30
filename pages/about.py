@@ -2,6 +2,8 @@ import streamlit as st
 import base64
 
 # Function to load and encode video for display
+
+
 @st.cache_data
 def load_video():
     with open('./docs/source/_static/movie.mp4', 'rb') as video_file:
@@ -16,6 +18,7 @@ def load_video():
         </video>
     """
     return video_html
+
 
 # Custom CSS for styling the page
 st.markdown(
@@ -42,7 +45,9 @@ st.markdown(
     </style>
     """, unsafe_allow_html=True
 )
+
 st.markdown("<hr>", unsafe_allow_html=True)
+
 # About section content
 st.markdown(
     """
@@ -90,7 +95,7 @@ st.markdown(
             </tr>
             <tr>
                 <th>SBU Type</th>
-                <th>Paddlewheel</th>
+                <th>Paddlewheel/rodlike/MOF32_sbu/paddlewheel_with_water/IRMOF_sbu</th>
             </tr>
             <tr>
                 <th>DOI</th>
@@ -188,8 +193,10 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True
 )
+
 # Adding a horizontal line
 st.markdown("<hr>", unsafe_allow_html=True)
+
 # Call to action or additional resources section
 st.markdown(
     """
@@ -200,8 +207,7 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True
 )
+
 # Uncomment the following lines if you want to display the video
-# @st.cache_data
 # video_html = load_video()
-# @st.cache_data
 # st.markdown(video_html, unsafe_allow_html=True)

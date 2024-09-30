@@ -86,6 +86,7 @@ def visualize_interactive_graph(nx_graph: nx.Graph, title):
         xaxis=dict(showgrid=False, zeroline=False, visible=False),
         yaxis=dict(showgrid=False, zeroline=False, visible=False)
     )
+    fig.show()
     return fig
 
 
@@ -124,3 +125,10 @@ def search_and_extract_from_gzip(mof_names, gzip_path, output_dir="mof_folders")
                     extracted_file.write(file_content)
 
     return output_dir
+
+
+# from mofstructure import filetyper
+# data = filetyper.load_data('../../data/store/A0.json')
+# nx_graph = create_graph_from_adjacency_matrix(data)
+# print (nx_graph)
+# fig = visualize_interactive_graph(nx_graph, 'Social_network')
