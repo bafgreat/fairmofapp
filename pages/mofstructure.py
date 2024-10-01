@@ -218,3 +218,5 @@ if uploaded_file is not None:
                 file_name=sbu_name,
                 mime="chemical/x-xyz"
             )
+
+# st.image("./assets/images/mofstructure.png")
