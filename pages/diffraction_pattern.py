@@ -11,6 +11,9 @@ from pymatgen.io.ase import AseAtomsAdaptor
 from scipy.signal import savgol_filter
 from fairmofapp.loader import visualizer
 
+@st.cache_resource
+def load_image(image_path):
+    return image_path
 
 def visualize_structure(ase_atom):
     """
@@ -167,3 +170,6 @@ if uploaded_file is not None:
             file_name="pattern_data.csv",
             mime="text/csv"
         )
+
+image_path = load_image("./assets/images/differaction_pattern.png")
+st.image(image_path)

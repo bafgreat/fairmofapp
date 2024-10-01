@@ -86,7 +86,6 @@ def visualize_interactive_graph(nx_graph: nx.Graph, title):
         xaxis=dict(showgrid=False, zeroline=False, visible=False),
         yaxis=dict(showgrid=False, zeroline=False, visible=False)
     )
-    fig.show()
     return fig
 
 

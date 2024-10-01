@@ -11,6 +11,11 @@ import pandas as pd
 from fairmofapp.loader import visualizer
 
 
+
+@st.cache_resource
+def load_image(image_path):
+    return image_path
+
 def visualize_structure(ase_atom):
     return visualizer.structure_visualizer(ase_atom)
 
@@ -219,4 +224,7 @@ if uploaded_file is not None:
                 mime="chemical/x-xyz"
             )
 
+
+image_path = load_image("./assets/images/mofstructure.png")
+st.image(image_path)
 # st.image("./assets/images/mofstructure.png")

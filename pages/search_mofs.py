@@ -10,12 +10,15 @@ import pandas as pd
 from tempfile import TemporaryDirectory
 from fairmofapp.loader.download_cif import search_and_copy_from_zip
 
-
+@st.cache_resource
 def load_index(index_dir):
     if index.exists_in(index_dir):
         return index.open_dir(index_dir)
     return None
 
+@st.cache_resource
+def load_image(image_path):
+    return image_path
 
 def search_mofs(query_str, index_dir):
     idx = load_index(index_dir)
@@ -126,4 +129,6 @@ if query or st.button("Search"):
         else:
             st.write("No results found.")
 
-st.image("./assets/images/search_mofs.png")
+# st.image("./assets/images/search_mofs.png")
+image_path = load_image("./assets/images/search_mofs.png")
+st.image(image_path)
